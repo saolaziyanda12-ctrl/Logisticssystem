@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cut & Tie Express | Management Dashboard</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <!-- Google Places API -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_API_KEY&libraries=places"></script>
+</head>
+<body>
+
+<div class="dashboard" id="dashboard">
+
+    <aside class="sidebar" id="sidebar">
+      <div class="logo">
+        <i class="fa-solid fa-truck-fast"></i>
+        <span class="logo-text">CUT & TIE</span>
+      </div>
+
+      <ul class="menu">
+        <li class="active"><i class="fa-solid fa-chart-pie"></i><span>Fleet Overview</span></li>
+        <li><i class="fa-solid fa-box"></i><span>Parcel Inventory</span></li>
+        <li><i class="fa-solid fa-id-badge"></i><span>Driver Profiles</span></li>
+        <li><i class="fa-solid fa-route"></i><span>Live Tracking</span></li>
+        <li><i class="fa-solid fa-file-invoice"></i><span>Proof of Delivery</span></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+
+      <header class="topbar">
+        <div class="top-left">
+          <button id="sidebarToggle">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <h1>In-Country Freight Management</h1>
+        </div>
+
+        <div class="top-right">
+          <button id="themeToggle">
+            <i class="fa-solid fa-circle-half-stroke"></i>
+          </button>
+
+          <div class="clock">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span id="clock">00:00:00</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Stats -->
+      <section class="stats-grid">
+        <div class="card brand-light">
+          <h3>Total Parcels</h3>
+          <p id="totalDeliveries">0</p>
+        </div>
+
+        <div class="card brand-light">
+          <h3>In Transit</h3>
+          <p id="progressDeliveries">0</p>
+        </div>
+
+        <div class="card brand-green">
+          <h3>Delivered (Verified)</h3>
+          <p id="completedDeliveries">0</p>
+        </div>
+
+        <div class="card brand-failed">
+          <h3>Flagged</h3>
+          <p id="failedDeliveries">0</p>
+        </div>
+      </section>
+
+      <div class="grid-2-col">
+
+          <!-- Delivery Form -->
+          <section class="section">
+            <div class="section-title">Log New Freight Item</div>
+
+            <form id="deliveryForm">
+
+              <input
+                type="text"
+                id="customer"
+                placeholder="Consignee Name"
+                required
+              />
+
+              <!-- Google Address Autocomplete -->
+              <input
+                type="text"
+                id="address"
+                placeholder="Destination Address"
+                required
+              />
+
+              <select id="status">
+                <option value="In Progress">In Transit</option>
+                <option value="Completed">Delivered</option>
+                <option value="Failed">Failed/Delayed</option>
+              </select>
+
+              <div class="file-area">
+                <input
+                  type="file"
+                  id="parcelImage"
+                  accept="image/*"
+                />
+              </div>
+
+              <button type="submit" id="submitBtn">
+                Save Delivery
+              </button>
+
+            </form>
+          </section>
+
+          <!-- Driver Section -->
+          <section class="section">
+            <div class="section-title">Active Drivers</div>
+
+            <div class="driver-list" id="driverList">
+              <!-- Loaded from API -->
+            </div>
+          </section>
+      </div>
+
+      <!-- Delivery Table -->
+      <section class="section">
+        <div class="section-title">Freight Audit Trail</div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Parcel Image</th>
+                <th>Consignee</th>
+                <th>Destination</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody id="deliveryTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Map -->
+      <section class="section">
+        <div class="section-title">Live Nationwide Vehicle Tracking</div>
+        <div id="map"></div>
+      </section>
+
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+```
+
+---
+
